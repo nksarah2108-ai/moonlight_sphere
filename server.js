@@ -96,7 +96,6 @@ app.post("/generate-rbt", (req, res) => {
 
 });
 
-
 /* =====================================
    DOWNLOAD RBT
 ===================================== */
@@ -112,14 +111,29 @@ app.get("/download-rbt", (req, res) => {
     .filter(file => file.endsWith(".docx"));
 
   if (files.length === 0) {
-    return res.send("Tiada fail untuk dimuat turun.");
+    return res.send("Tiada fail RBT untuk dimuat turun.");
   }
 
-  const latestFile = path.join(folderPath, files[files.length - 1]);
+  // Ambil file paling latest
+  const latestFile = files.sort().reverse()[0];
 
-  res.download(latestFile);
+  const filePath = path.join(folderPath, latestFile);
+
+  res.download(filePath);
 });
+/* =====================================
+   DOWNLOAD BM
+===================================== */
+app.get("/download-rph", (req, res) => {
 
+  const filePath = path.join(__dirname, "RPH_BM_FINAL_OUTPUT.pptx");
+
+  if (!fs.existsSync(filePath)) {
+    return res.send("Fail BM belum dijana.");
+  }
+
+  res.download(filePath);
+});
 
 /* =====================================
    START SERVER
