@@ -261,7 +261,7 @@ async function janaRPH(){
 
     addBot("✨ Sedang jana RPH...");
 
-    const response = await fetch("http://localhost:3001/generate-rph", {
+    const response = await fetch("/generate-rph", {
       method:"POST",
       headers:{"Content-Type":"application/json"},
       body:JSON.stringify({
@@ -381,7 +381,7 @@ ${catatan}
 
     try{
 
-        const response = await fetch("http://localhost:3001/generate-rbt", {
+        const response = await fetch("/generate-rbt", {
             method: "POST",
             headers: { 
                 "Content-Type": "application/json" 
