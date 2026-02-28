@@ -384,9 +384,7 @@ ${catatan}
 
         const response = await fetch("/generate-rbt", {
             method: "POST",
-            headers: { 
-                "Content-Type": "application/json" 
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 minggu,
                 tarikh,
@@ -397,21 +395,15 @@ ${catatan}
             })
         });
 
-        if(!response.ok){
-            alert("Gagal jana RBT.");
+        const data = await response.json();
+
+        if(data.error){
+            alert(data.error);
             return;
         }
 
-        // 🔥 Ambil file sebagai blob
-        const blob = await response.blob();
-
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = `RPH_RBT_M${minggu}.docx`;
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
+        alert("RBT berjaya dijana!");
+        window.location.href = "/download-rbt";
 
     } catch(err){
         console.error(err);
