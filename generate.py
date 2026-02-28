@@ -83,9 +83,7 @@ def generate_rph(pdf_path, kelas, tarikh, hari_dipilih):
 
     with pdfplumber.open(pdf_path) as pdf:
 
-        base_path = os.path.dirname(__file__)
-template_path = os.path.join(base_path, "RPH_BM_TEMPLATE.pptx")
-prs = Presentation(template_path)
+        prs = Presentation("templates/template_rph_bm.pptx")
         slide_pointer = 0
 
         for pdf_index in hari_dipilih:
