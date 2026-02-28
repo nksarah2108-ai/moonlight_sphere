@@ -1,1 +1,422 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<title>Chatbot RPH - Cikgu Moon</title>
 
+<style>
+body{
+  margin:0;
+  font-family:'Segoe UI', sans-serif;
+  background: linear-gradient(135deg,#ffe6f0,#e6e6ff,#e0f7ff);
+}
+
+.header{
+  padding:20px 40px;
+  font-size:24px;
+  font-weight:bold;
+  color:#6a1b9a;
+}
+
+.container{
+  display:grid;
+  grid-template-columns: 2fr 1fr;
+  gap:40px;
+  padding:40px;
+}
+
+.chat-section{
+  padding:30px;
+  min-height:500px;
+}
+
+.card-section{
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+}
+
+.card{
+  background:#f8bbd0;
+  padding:25px;
+  border-radius:25px;
+  text-align:center;
+  width:100%;
+  max-width:320px;
+}
+
+.card img{
+  width:220px;
+  border-radius:20px;
+}
+
+.card h3{
+  color:#8e24aa;
+}
+
+.chat-box{
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+}
+
+.chat-box div{
+  background:white;
+  padding:15px;
+  border-radius:15px;
+}
+
+input, select, textarea{
+  width:90%;
+  padding:10px;
+  margin:6px 0;
+  border-radius:10px;
+  border:1px solid #ddd;
+}
+
+button{
+  padding:10px 18px;
+  margin-top:10px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(45deg,#f8bbd0,#ce93d8);
+  color:white;
+  cursor:pointer;
+  font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">🌙 Chatbot RPH - Cikgu Moon</div>
+
+<div class="container">
+
+<div class="chat-section">
+  <div class="chat-box" id="chatBox"></div>
+</div>
+
+<div class="card-section">
+  <div class="card">
+    <img src="rph.png">
+    <h3>Chatbot RPH</h3>
+    <p>Bina RPH Automatik</p>
+  </div>
+</div>
+
+</div>
+
+<script>
+
+let selectedSubject = "";
+
+document.addEventListener("DOMContentLoaded", function(){
+  start();
+});
+
+function getChatBox(){
+  return document.getElementById("chatBox");
+}
+
+function addBot(text){
+  const div = document.createElement("div");
+  div.innerHTML = text;
+  getChatBox().appendChild(div);
+}
+
+function addUser(text){
+  const div = document.createElement("div");
+  div.innerHTML = text;
+  getChatBox().appendChild(div);
+}
+
+function resetChat(){
+  getChatBox().innerHTML="";
+  selectedSubject="";
+  start();
+}
+
+function start(){
+  addBot("Hai! Saya Cikgu Moon 🌙<br>Pilih subjek:");
+  addBot(`
+    <button onclick="choose('BM')">Bahasa Melayu</button>
+    <button onclick="choose('RBT')">Reka Bentuk & Teknologi</button>
+  `);
+}
+
+function choose(sub){
+  selectedSubject = sub;
+  addUser(sub);
+
+  if(sub === "BM"){
+    showBMForm();
+  }
+
+  if(sub === "RBT"){
+    showRBTForm();
+  }
+}
+
+/* ===========================
+   BM FORM (ASAL CIKGU)
+=========================== */
+function showBMForm(){
+
+  addBot(`
+    <b>Isi Maklumat RPH</b><br><br>
+
+    <label>Minggu:</label><br>
+    <select id="minggu">
+      <option value="">-- Pilih Minggu --</option>
+
+<option value="05|9–13/2/2026">M05 (9–13/2/2026)</option>
+<option value="06|16–20/2/2026">M06 (16–20/2/2026)</option>
+<option value="07|23–27/2/2026">M07 (23–27/2/2026)</option>
+<option value="08|2–6/3/2026">M08 (2–6/3/2026)</option>
+<option value="09|9–13/3/2026">M09 (9–13/3/2026)</option>
+<option value="10|16–20/3/2026">M10 (16–20/3/2026)</option>
+<option value="11|23–27/3/2026">M11 (23–27/3/2026)</option>
+
+<option value="12|6–10/4/2026">M12 (6–10/4/2026)</option>
+<option value="13|13–17/4/2026">M13 (13–17/4/2026)</option>
+<option value="14|20–24/4/2026">M14 (20–24/4/2026)</option>
+<option value="15|27/4–1/5/2026">M15 (27/4–1/5/2026)</option>
+<option value="16|4–8/5/2026">M16 (4–8/5/2026)</option>
+<option value="17|11–15/5/2026">M17 (11–15/5/2026)</option>
+<option value="18|18–22/5/2026">M18 (18–22/5/2026)</option>
+
+<option value="19|8–12/6/2026">M19 (8–12/6/2026)</option>
+<option value="20|15–19/6/2026">M20 (15–19/6/2026)</option>
+<option value="21|22–26/6/2026">M21 (22–26/6/2026)</option>
+<option value="22|29/6–3/7/2026">M22 (29/6–3/7/2026)</option>
+<option value="23|6–10/7/2026">M23 (6–10/7/2026)</option>
+<option value="24|13–17/7/2026">M24 (13–17/7/2026)</option>
+<option value="25|20–24/7/2026">M25 (20–24/7/2026)</option>
+<option value="26|27–31/7/2026">M26 (27–31/7/2026)</option>
+
+<option value="27|3–7/8/2026">M27 (3–7/8/2026)</option>
+<option value="28|10–14/8/2026">M28 (10–14/8/2026)</option>
+<option value="29|17–21/8/2026">M29 (17–21/8/2026)</option>
+<option value="30|24–28/8/2026">M30 (24–28/8/2026)</option>
+<option value="31|31/8–4/9/2026">M31 (31/8–4/9/2026)</option>
+<option value="32|7–11/9/2026">M32 (7–11/9/2026)</option>
+<option value="33|14–18/9/2026">M33 (14–18/9/2026)</option>
+<option value="34|21–25/9/2026">M34 (21–25/9/2026)</option>
+
+<option value="35|28/9–2/10/2026">M35 (28/9–2/10/2026)</option>
+<option value="36|5–9/10/2026">M36 (5–9/10/2026)</option>
+<option value="37|12–16/10/2026">M37 (12–16/10/2026)</option>
+<option value="38|19–23/10/2026">M38 (19–23/10/2026)</option>
+
+    </select>
+
+    <br><br>
+
+    <b>Pilih Hari Mengajar:</b><br><br>
+
+    <div style="display:flex; flex-wrap:wrap; gap:15px;">
+      <label><input type="checkbox" value="0" class="hari"> Isnin</label>
+      <label><input type="checkbox" value="1" class="hari"> Selasa</label>
+      <label><input type="checkbox" value="2" class="hari"> Rabu</label>
+      <label><input type="checkbox" value="3" class="hari"> Khamis</label>
+      <label><input type="checkbox" value="4" class="hari"> Jumaat</label>
+    </div>
+
+    <br><br>
+
+    <div style="display:flex; gap:10px;">
+      <button onclick="janaRPH()">Jana RPH ✨</button>
+      <button onclick="resetChat()">Reset ✨</button>
+    </div>
+  `);
+}
+
+async function janaRPH(){
+
+  try {
+
+    const mingguFull = document.getElementById("minggu").value;
+
+    if(!mingguFull){
+      alert("Sila pilih minggu.");
+      return;
+    }
+
+    const parts = mingguFull.split("|");
+    const minggu = parts[0];
+    const tarikh = parts[1];
+
+    const hariCheckbox = document.querySelectorAll(".hari:checked");
+    let hariDipilih = [];
+
+    hariCheckbox.forEach(cb => {
+      hariDipilih.push(parseInt(cb.value));
+    });
+
+    if(hariDipilih.length === 0){
+      alert("Sila pilih sekurang-kurangnya satu hari.");
+      return;
+    }
+
+    addBot("✨ Sedang jana RPH...");
+
+    const response = await fetch("/generate-rph", {
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        minggu: minggu,
+        tarikh: tarikh,
+        kelas: "4 IBNU KHALDUN",
+        hari_dipilih: hariDipilih
+      })
+    });
+
+    const data = await response.json();
+
+    if(data.error){
+      addBot("❌ " + data.error);
+    } else {
+      addBot("✅ RPH berjaya dijana!");
+    }
+
+  } catch(err) {
+    addBot("❌ Server tidak dapat dihubungi.");
+  }
+}
+
+/* ===========================
+   RBT FORM
+=========================== */
+function showRBTForm(){
+
+  addBot(`
+  <b>Isi Maklumat RBT Tahun 5</b><br><br>
+
+  <label>Minggu:</label><br>
+<select id="rbt_minggu">
+  <option value="">-- Pilih Minggu --</option>
+  ${Array.from({length:34}, (_,i) => {
+    let num = (i+5).toString().padStart(2,'0');
+    return `<option value="${num}">Minggu ${i+5}</option>`;
+  }).join("")}
+</select><br><br>
+
+  <label>Tarikh:</label><br>
+  <input type="date" id="rbt_tarikh"><br><br>
+
+  <label>Kelas:</label><br>
+  <select id="rbt_kelas">
+    <option value="">-- Pilih Kelas --</option>
+    <option value="5 Ibnu Sina">5 Ibnu Sina</option>
+    <option value="5 Ibnu Khaldun">5 Ibnu Khaldun</option>
+  </select><br><br>
+
+  <label>Hari:</label><br>
+  <select id="rbt_hari">
+    <option value="Isnin">Isnin</option>
+    <option value="Selasa">Selasa</option>
+    <option value="Rabu">Rabu</option>
+    <option value="Khamis">Khamis</option>
+    <option value="Jumaat">Jumaat</option>
+  </select><br><br>
+
+  <label>Masa:</label><br>
+  <select id="rbt_masa">
+    <option value="11.30-12.30">11.30-12.30</option>
+    <option value="8.40-9.40">8.40-9.40</option>
+  </select><br><br>
+
+  <b>Refleksi:</b><br><br>
+
+  <label>Jumlah Murid:</label><br>
+  <input type="number" id="rbt_jumlah"><br><br>
+
+  <label>Mencapai Objektif:</label><br>
+  <input type="number" id="rbt_capai"><br><br>
+
+  <label>Lengkap Latihan:</label><br>
+  <input type="number" id="rbt_lengkap"><br><br>
+
+  <label>Perlu Bimbingan:</label><br>
+  <input type="number" id="rbt_bimbingan"><br><br>
+
+  <label>Catatan:</label><br>
+  <textarea id="rbt_catatan" rows="5"></textarea><br><br>
+
+  <div style="display:flex; gap:10px;">
+    <button onclick="janaRBT()">Jana RBT ✨</button>
+    <button onclick="resetChat()">Reset ✨</button>
+  </div>
+  `);
+}
+
+async function janaRBT(){
+
+    const minggu = document.getElementById("rbt_minggu").value;
+    const tarikh = document.getElementById("rbt_tarikh").value;
+    const hari = document.getElementById("rbt_hari").value;
+    const kelas = document.getElementById("rbt_kelas").value;
+    const masa = document.getElementById("rbt_masa").value;
+
+    const jumlah = document.getElementById("rbt_jumlah").value;
+    const capai = document.getElementById("rbt_capai").value;
+    const lengkap = document.getElementById("rbt_lengkap").value;
+    const bimbingan = document.getElementById("rbt_bimbingan").value;
+    const catatan = document.getElementById("rbt_catatan").value;
+
+    if(!minggu || !tarikh || !hari || !kelas || !masa){
+        alert("Sila lengkapkan semua maklumat.");
+        return;
+    }
+
+    const refleksiText = `
+${capai}/${jumlah} murid dapat mencapai objektif pembelajaran.
+${lengkap}/${jumlah} murid boleh melengkapkan latihan.
+${bimbingan}/${jumlah} murid memerlukan bimbingan lanjut.
+
+Catatan:
+${catatan}
+`;
+
+    try{
+
+        const response = await fetch("/generate-rbt", {
+            method: "POST",
+            headers: { 
+                "Content-Type": "application/json" 
+            },
+            body: JSON.stringify({
+                minggu,
+                tarikh,
+                hari,
+                kelas,
+                masa,
+                refleksi: refleksiText
+            })
+        });
+
+        if(!response.ok){
+            alert("Gagal jana RBT.");
+            return;
+        }
+
+        // 🔥 Ambil file sebagai blob
+        const blob = await response.blob();
+
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `RPH_RBT_M${minggu}.docx`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+
+    } catch(err){
+        console.error(err);
+        alert("Ralat semasa menjana RBT.");
+    }
+}
+</script>
+</body>
+</html>
