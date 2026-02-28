@@ -66,7 +66,7 @@ app.post("/generate-rbt", (req, res) => {
   console.log("=== DATA RBT DITERIMA ===");
   console.log(req.body);
 
-  const python = spawn("python3", [
+  const python = spawn("python", [
     "generate_rbt_t5.py",
     minggu,
     tarikh,
