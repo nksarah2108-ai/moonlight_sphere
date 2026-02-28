@@ -275,10 +275,11 @@ async function janaRPH(){
     const data = await response.json();
 
     if(data.error){
-      addBot("❌ " + data.error);
-    } else {
-      addBot("✅ RPH berjaya dijana!");
-    }
+  addBot("❌ " + data.error);
+} else {
+  addBot("✅ RPH berjaya dijana!");
+  window.location.href = "/download-rph";
+}
 
   } catch(err) {
     addBot("❌ Server tidak dapat dihubungi.");
