@@ -103,7 +103,7 @@ def generate_rph(pdf_path, kelas, tarikh, hari_dipilih):
 
             objektif = extract(page_text, "OBJEKTIF", "AKTIVITI")
 
-            aktiviti_raw = extract(page_text, "AKTIVITI", "KAEDAH PENGAJARAN")
+            aktiviti_raw = extract(page_text, "AKTIVITI", "KBAT")
             aktiviti_lines = []
 
             for line in aktiviti_raw.split("\n"):
