@@ -1,7 +1,10 @@
 from docx import Document
 import sys
 import os
-
+def replace_placeholder(paragraph, placeholder, value):
+    for run in paragraph.runs:
+        if placeholder in run.text:
+            run.text = run.text.replace(placeholder, value)
 
 def generate_rbt(minggu, kelas, tarikh, hari, masa, refleksi):
 
@@ -19,42 +22,24 @@ def generate_rbt(minggu, kelas, tarikh, hari, masa, refleksi):
     # 2️⃣ Replace placeholder
     # ==============================
     for p in doc.paragraphs:
-        if "{{KELAS}}" in p.text:
-            p.text = p.text.replace("{{KELAS}}", kelas)
-
-        if "{{TARIKH}}" in p.text:
-            p.text = p.text.replace("{{TARIKH}}", tarikh)
-
-        if "{{HARI}}" in p.text:
-            p.text = p.text.replace("{{HARI}}", hari)
-
-        if "{{MASA}}" in p.text:
-            p.text = p.text.replace("{{MASA}}", masa)
-
-        if "{{REFLEKSI}}" in p.text:
-            p.text = p.text.replace("{{REFLEKSI}}", refleksi)
-
+    replace_placeholder(p, "{{KELAS}}", kelas)
+    replace_placeholder(p, "{{TARIKH}}", tarikh)
+    replace_placeholder(p, "{{HARI}}", hari)
+    replace_placeholder(p, "{{MASA}}", masa)
+    replace_placeholder(p, "{{REFLEKSI}}", refleksi)
+        
     # ==============================
     # 3️⃣ Replace dalam TABLE juga
     # ==============================
     for table in doc.tables:
-        for row in table.rows:
-            for cell in row.cells:
-                if "{{KELAS}}" in cell.text:
-                    cell.text = cell.text.replace("{{KELAS}}", kelas)
-
-                if "{{TARIKH}}" in cell.text:
-                    cell.text = cell.text.replace("{{TARIKH}}", tarikh)
-
-                if "{{HARI}}" in cell.text:
-                    cell.text = cell.text.replace("{{HARI}}", hari)
-
-                if "{{MASA}}" in cell.text:
-                    cell.text = cell.text.replace("{{MASA}}", masa)
-
-                if "{{REFLEKSI}}" in cell.text:
-                    cell.text = cell.text.replace("{{REFLEKSI}}", refleksi)
-
+    for row in table.rows:
+        for cell in row.cells:
+            for paragraph in cell.paragraphs:
+                replace_placeholder(paragraph, "{{KELAS}}", kelas)
+                replace_placeholder(paragraph, "{{TARIKH}}", tarikh)
+                replace_placeholder(paragraph, "{{HARI}}", hari)
+                replace_placeholder(paragraph, "{{MASA}}", masa)
+                replace_placeholder(paragraph, "{{REFLEKSI}}", refleksi)
     # ==============================
     # 4️⃣ Save output
     # ==============================
