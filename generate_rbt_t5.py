@@ -1,16 +1,16 @@
 from docx import Document
 import sys
 import os
+
+
 def replace_placeholder(paragraph, placeholder, value):
     for run in paragraph.runs:
         if placeholder in run.text:
             run.text = run.text.replace(placeholder, value)
 
+
 def generate_rbt(minggu, kelas, tarikh, hari, masa, refleksi):
 
-    # ==============================
-    # 1️⃣ Load template ikut minggu
-    # ==============================
     template_path = f"rbt_templates/M{minggu}.docx"
 
     if not os.path.exists(template_path):
@@ -19,29 +19,30 @@ def generate_rbt(minggu, kelas, tarikh, hari, masa, refleksi):
     doc = Document(template_path)
 
     # ==============================
-    # 2️⃣ Replace placeholder
+    # Replace placeholder (paragraph)
     # ==============================
     for p in doc.paragraphs:
-    replace_placeholder(p, "{{KELAS}}", kelas)
-    replace_placeholder(p, "{{TARIKH}}", tarikh)
-    replace_placeholder(p, "{{HARI}}", hari)
-    replace_placeholder(p, "{{MASA}}", masa)
-    replace_placeholder(p, "{{REFLEKSI}}", refleksi)
-        
+        replace_placeholder(p, "{{KELAS}}", kelas)
+        replace_placeholder(p, "{{TARIKH}}", tarikh)
+        replace_placeholder(p, "{{HARI}}", hari)
+        replace_placeholder(p, "{{MASA}}", masa)
+        replace_placeholder(p, "{{REFLEKSI}}", refleksi)
+
     # ==============================
-    # 3️⃣ Replace dalam TABLE juga
+    # Replace dalam TABLE
     # ==============================
     for table in doc.tables:
-    for row in table.rows:
-        for cell in row.cells:
-            for paragraph in cell.paragraphs:
-                replace_placeholder(paragraph, "{{KELAS}}", kelas)
-                replace_placeholder(paragraph, "{{TARIKH}}", tarikh)
-                replace_placeholder(paragraph, "{{HARI}}", hari)
-                replace_placeholder(paragraph, "{{MASA}}", masa)
-                replace_placeholder(paragraph, "{{REFLEKSI}}", refleksi)
+        for row in table.rows:
+            for cell in row.cells:
+                for paragraph in cell.paragraphs:
+                    replace_placeholder(paragraph, "{{KELAS}}", kelas)
+                    replace_placeholder(paragraph, "{{TARIKH}}", tarikh)
+                    replace_placeholder(paragraph, "{{HARI}}", hari)
+                    replace_placeholder(paragraph, "{{MASA}}", masa)
+                    replace_placeholder(paragraph, "{{REFLEKSI}}", refleksi)
+
     # ==============================
-    # 4️⃣ Save output
+    # Save output
     # ==============================
     output_folder = "output"
     os.makedirs(output_folder, exist_ok=True)
@@ -52,9 +53,6 @@ def generate_rbt(minggu, kelas, tarikh, hari, masa, refleksi):
     return output_file
 
 
-# ==================================
-# RUN DARI TERMINAL / NODE
-# ==================================
 if __name__ == "__main__":
 
     minggu = sys.argv[1]
