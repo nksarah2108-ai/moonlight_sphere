@@ -98,12 +98,12 @@ def generate_rph(pdf_path, kelas, tarikh, hari_dipilih):
             tajuk = extract(page_text, "TAJUK", "STANDARD KANDUNGAN")
             sk = extract(page_text, "STANDARD KANDUNGAN", "STANDARD PEMBELAJARAN")
 
-            sp_full = extract(page_text, "STANDARD PEMBELAJARAN", "AKTIVITI PERMULAAN")
+            sp_full = extract(page_text, "STANDARD PEMBELAJARAN", "OBJEKTIF")
             sp = sp_full.split("\n")[0] if sp_full else ""
 
-            objektif = extract(page_text, "Pada akhir pengajaran", "AKTIVITI PERMULAAN")
+            objektif = extract(page_text, "OBJEKTIF", "AKTIVITI")
 
-            aktiviti_raw = extract(page_text, "AKTIVITI UTAMA", "AKTIVITI PENUTUP")
+            aktiviti_raw = extract(page_text, "AKTIVITI", "KAEDAH PENGAJARAN")
             aktiviti_lines = []
 
             for line in aktiviti_raw.split("\n"):
