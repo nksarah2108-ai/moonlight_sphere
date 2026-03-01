@@ -69,12 +69,12 @@ app.post("/generate-rbt", (req, res) => {
   const python = spawn("python", [
     "generate_rbt_t5.py",
     minggu,
-    tarikh,
-    hari,
-    kelas,
+    kelas,      // ✅ kelas kedua
+    tarikh,     // ✅ tarikh ketiga
+    hari,       // ✅ hari keempat
     masa,
     refleksi
-  ]);
+]);
 
   python.stdout.on("data", (data) => {
     console.log("PYTHON RBT:", data.toString());
